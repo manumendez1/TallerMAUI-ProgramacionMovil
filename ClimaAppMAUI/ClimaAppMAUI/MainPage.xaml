@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:ClimaAppMAUI.Converters"
+             x:Class="ClimaAppMAUI.MainPage"
+             Title="Clima App"
+             BackgroundColor="#E3F2FD">
+
+    <ContentPage.Resources>
+        <converters:WeatherIconConverter x:Key="WeatherIconConverter"/>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="Center">
+
+        <Label Text="🌍 CLIMA ACTUAL"
+               FontSize="28"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               TextColor="#1565C0"/>
+
+        <Border BackgroundColor="White"
+                StrokeShape="RoundRectangle 15"
+                StrokeThickness="0"
+                Padding="20">
+
+            <VerticalStackLayout Spacing="10">
+
+                <Label Text="{Binding Condition, Converter={StaticResource WeatherIconConverter}}"
+                       FontSize="26"
+                       HorizontalOptions="Center"
+                       FontAttributes="Bold"/>
+
+                <Grid ColumnDefinitions="*,*" RowSpacing="5">
+
+                    <VerticalStackLayout HorizontalOptions="Center">
+                        <Label Text="🌡️ Temperatura"
+                               FontSize="13"
+                               TextColor="Gray"
+                               HorizontalOptions="Center"/>
+                        <Label Text="{Binding Temperature, StringFormat='{0:F1}°C'}"
+                               FontSize="36"
+                               FontAttributes="Bold"
+                               TextColor="#E53935"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                        <Label Text="💧 Humedad"
+                               FontSize="13"
+                               TextColor="Gray"
+                               HorizontalOptions="Center"/>
+                        <Label Text="{Binding Humidity, StringFormat='{0}%'}"
+                               FontSize="36"
+                               FontAttributes="Bold"
+                               TextColor="#1E88E5"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+
+                </Grid>
+            </VerticalStackLayout>
+        </Border>
+
+        <Button Text="🔄 Actualizar Clima"
+                Clicked="OnActualizarClicked"
+                BackgroundColor="#FF8F00"
+                TextColor="White"
+                FontSize="18"
+                CornerRadius="10"
+                Margin="0,10"/>
+
+    </VerticalStackLayout>
+</ContentPage>

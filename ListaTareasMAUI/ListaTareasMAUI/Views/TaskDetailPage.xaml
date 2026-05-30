@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ListaTareasMAUI.Views.TaskDetailPage"
+    Title="Editar Tarea"
+    BackgroundColor="#F3F7FF">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="25"
+            Spacing="25">
+
+            <Frame
+                BackgroundColor="#2563EB"
+                CornerRadius="25"
+                Padding="25">
+
+                <VerticalStackLayout>
+
+                    <Label
+                        Text="✏️ EDITAR TAREA"
+                        FontSize="30"
+                        FontAttributes="Bold"
+                        TextColor="White"/>
+
+                    <Label
+                        Text="Actualiza la información"
+                        FontSize="14"
+                        TextColor="#DBEAFE"/>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+            <Frame
+                BackgroundColor="White"
+                CornerRadius="20"
+                Padding="20">
+
+                <VerticalStackLayout Spacing="20">
+
+                    <Entry
+                        x:Name="taskEntry"
+                        Placeholder="Nombre tarea"
+                        FontSize="16"/>
+
+                    <HorizontalStackLayout Spacing="10">
+
+                        <CheckBox
+                            x:Name="completedCheck"
+                            Color="#2563EB"/>
+
+                        <Label
+                            Text="Marcar como completada"
+                            VerticalOptions="Center"/>
+
+                    </HorizontalStackLayout>
+
+                    <Button
+                        Text="💾 Guardar Cambios"
+                        Clicked="OnSaveClicked"
+                        BackgroundColor="#2563EB"
+                        TextColor="White"
+                        HeightRequest="50"
+                        CornerRadius="15"/>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

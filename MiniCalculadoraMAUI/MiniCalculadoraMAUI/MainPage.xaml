@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MiniCalculadoraMAUI.MainPage"
+    Title="Calculadora"
+    BackgroundColor="#EFF6FF">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <!-- HEADER -->
+            <Border
+                BackgroundColor="#1E88E5"
+                StrokeShape="RoundRectangle 24"
+                Padding="25,20">
+                <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                    <Label
+                        Text="🧮 Calculadora"
+                        FontSize="30"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        HorizontalOptions="Center"/>
+                    <Label
+                        Text="Realiza operaciones básicas"
+                        FontSize="13"
+                        TextColor="#BBDEFB"
+                        HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- TARJETA PRINCIPAL -->
+            <Border
+                BackgroundColor="White"
+                StrokeShape="RoundRectangle 20"
+                Stroke="#E3F2FD"
+                Padding="20">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <!-- NÚMERO 1 -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label
+                            Text="Primer número"
+                            FontSize="13"
+                            FontAttributes="Bold"
+                            TextColor="#546E7A"/>
+                        <Border
+                            StrokeShape="RoundRectangle 12"
+                            Stroke="#BBDEFB"
+                            BackgroundColor="#F8FBFF"
+                            Padding="12,0">
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Label
+                                    Text="🔢"
+                                    FontSize="18"
+                                    VerticalOptions="Center"
+                                    Margin="0,0,8,0"/>
+                                <Entry
+                                    Grid.Column="1"
+                                    x:Name="numero1Entry"
+                                    Placeholder="Ingresa el primer número"
+                                    Keyboard="Numeric"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#1A237E"
+                                    PlaceholderColor="#90A4AE"
+                                    FontSize="15"/>
+                            </Grid>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- NÚMERO 2 -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label
+                            Text="Segundo número"
+                            FontSize="13"
+                            FontAttributes="Bold"
+                            TextColor="#546E7A"/>
+                        <Border
+                            StrokeShape="RoundRectangle 12"
+                            Stroke="#BBDEFB"
+                            BackgroundColor="#F8FBFF"
+                            Padding="12,0">
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Label
+                                    Text="🔢"
+                                    FontSize="18"
+                                    VerticalOptions="Center"
+                                    Margin="0,0,8,0"/>
+                                <Entry
+                                    Grid.Column="1"
+                                    x:Name="numero2Entry"
+                                    Placeholder="Ingresa el segundo número"
+                                    Keyboard="Numeric"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#1A237E"
+                                    PlaceholderColor="#90A4AE"
+                                    FontSize="15"/>
+                            </Grid>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- OPERACIÓN -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label
+                            Text="Operación"
+                            FontSize="13"
+                            FontAttributes="Bold"
+                            TextColor="#546E7A"/>
+                        <Border
+                            StrokeShape="RoundRectangle 12"
+                            Stroke="#BBDEFB"
+                            BackgroundColor="#F8FBFF"
+                            Padding="12,4">
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Label
+                                    Text="➗"
+                                    FontSize="18"
+                                    VerticalOptions="Center"
+                                    Margin="0,0,8,0"/>
+                                <Picker
+                                    Grid.Column="1"
+                                    x:Name="operacionPicker"
+                                    Title="Selecciona una operación"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#1A237E"
+                                    TitleColor="#90A4AE"
+                                    FontSize="15">
+                                    <Picker.Items>
+                                        <x:String>➕  Sumar</x:String>
+                                        <x:String>➖  Restar</x:String>
+                                        <x:String>✖️  Multiplicar</x:String>
+                                        <x:String>➗  Dividir</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </Grid>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- BOTÓN -->
+                    <Button
+                        Text="= CALCULAR"
+                        Clicked="OnCalcularClicked"
+                        BackgroundColor="#1E88E5"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        HeightRequest="54"
+                        CornerRadius="14"
+                        Margin="0,6,0,0"/>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- RESULTADO -->
+            <Border
+                x:Name="resultadoBorder"
+                BackgroundColor="White"
+                StrokeShape="RoundRectangle 20"
+                Stroke="#E3F2FD"
+                Padding="20"
+                IsVisible="False">
+                <VerticalStackLayout Spacing="6" HorizontalOptions="Center">
+                    <Label
+                        Text="Resultado"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="#546E7A"
+                        HorizontalOptions="Center"/>
+                    <Label
+                        x:Name="resultadoLabel"
+                        FontSize="42"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        TextColor="#1E88E5"/>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

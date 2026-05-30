@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="AgendaSQLiteMAUI.MainPage"
+    Title="Agenda de Contactos"
+    BackgroundColor="#F5F5F5">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- FORMULARIO SUPERIOR -->
+        <Border
+            Grid.Row="0"
+            BackgroundColor="White"
+            Margin="15,15,15,0"
+            Padding="20"
+            StrokeShape="RoundRectangle 16"
+            Stroke="#E0E0E0">
+
+            <VerticalStackLayout Spacing="12">
+
+                <!-- TÍTULO FORMULARIO -->
+                <Label
+                    Text="➕ Nuevo Contacto"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    TextColor="#3F3F3F"/>
+
+                <BoxView
+                    HeightRequest="1"
+                    BackgroundColor="#E0E0E0"/>
+
+                <!-- CAMPO NOMBRE -->
+                <Border
+                    StrokeShape="RoundRectangle 10"
+                    Stroke="#E0E0E0"
+                    BackgroundColor="#FAFAFA"
+                    Padding="12,0">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Label
+                            Text="👤"
+                            FontSize="18"
+                            VerticalOptions="Center"
+                            Margin="0,0,10,0"/>
+                        <Entry
+                            Grid.Column="1"
+                            Placeholder="Nombre completo"
+                            Text="{Binding Current.Name}"
+                            PlaceholderColor="#AAAAAA"
+                            TextColor="#333333"
+                            BackgroundColor="Transparent"/>
+                    </Grid>
+                </Border>
+
+                <!-- CAMPO TELÉFONO -->
+                <Border
+                    StrokeShape="RoundRectangle 10"
+                    Stroke="#E0E0E0"
+                    BackgroundColor="#FAFAFA"
+                    Padding="12,0">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Label
+                            Text="📞"
+                            FontSize="18"
+                            VerticalOptions="Center"
+                            Margin="0,0,10,0"/>
+                        <Entry
+                            Grid.Column="1"
+                            Placeholder="Número de teléfono"
+                            Text="{Binding Current.Phone}"
+                            Keyboard="Telephone"
+                            PlaceholderColor="#AAAAAA"
+                            TextColor="#333333"
+                            BackgroundColor="Transparent"/>
+                    </Grid>
+                </Border>
+
+                <!-- CAMPO EMAIL -->
+                <Border
+                    StrokeShape="RoundRectangle 10"
+                    Stroke="#E0E0E0"
+                    BackgroundColor="#FAFAFA"
+                    Padding="12,0">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Label
+                            Text="✉️"
+                            FontSize="18"
+                            VerticalOptions="Center"
+                            Margin="0,0,10,0"/>
+                        <Entry
+                            Grid.Column="1"
+                            Placeholder="Correo electrónico"
+                            Text="{Binding Current.Email}"
+                            Keyboard="Email"
+                            PlaceholderColor="#AAAAAA"
+                            TextColor="#333333"
+                            BackgroundColor="Transparent"/>
+                    </Grid>
+                </Border>
+
+                <!-- BOTÓN GUARDAR -->
+                <Button
+                    Text="💾  Guardar Contacto"
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="#5C6BC0"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontSize="15"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    Margin="0,5,0,0"/>
+
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- LISTA DE CONTACTOS -->
+        <VerticalStackLayout Grid.Row="1" Margin="15,15,15,0">
+
+            <!-- ENCABEZADO LISTA -->
+            <Grid ColumnDefinitions="*,Auto" Margin="5,0,5,10">
+                <Label
+                    Text="📋 Contactos guardados"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    TextColor="#3F3F3F"
+                    VerticalOptions="Center"/>
+                <Border
+                    Grid.Column="1"
+                    BackgroundColor="#5C6BC0"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="10,4">
+                    <Label
+                        Text="{Binding Contacts.Count}"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        FontSize="13"/>
+                </Border>
+            </Grid>
+
+            <!-- LISTA -->
+            <CollectionView ItemsSource="{Binding Contacts}">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Border
+                            BackgroundColor="White"
+                            StrokeShape="RoundRectangle 12"
+                            Stroke="#E0E0E0"
+                            Margin="0,0,0,10"
+                            Padding="15">
+
+                            <Grid ColumnDefinitions="Auto,*,Auto">
+
+                                <!-- AVATAR -->
+                                <Border
+                                    BackgroundColor="#5C6BC0"
+                                    StrokeShape="RoundRectangle 25"
+                                    WidthRequest="48"
+                                    HeightRequest="48"
+                                    VerticalOptions="Center">
+                                    <Label
+                                        Text="{Binding Name[0]}"
+                                        TextColor="White"
+                                        FontSize="20"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"/>
+                                </Border>
+
+                                <!-- INFO -->
+                                <VerticalStackLayout
+                                    Grid.Column="1"
+                                    Margin="12,0"
+                                    VerticalOptions="Center"
+                                    Spacing="2">
+                                    <Label
+                                        Text="{Binding Name}"
+                                        FontSize="16"
+                                        FontAttributes="Bold"
+                                        TextColor="#333333"/>
+                                    <Label
+                                        Text="{Binding Phone}"
+                                        FontSize="13"
+                                        TextColor="#777777"/>
+                                    <Label
+                                        Text="{Binding Email}"
+                                        FontSize="12"
+                                        TextColor="#AAAAAA"/>
+                                </VerticalStackLayout>
+
+                                <!-- BOTÓN ELIMINAR -->
+                                <Button
+                                    Grid.Column="2"
+                                    Text="🗑️"
+                                    FontSize="18"
+                                    BackgroundColor="#FFEBEE"
+                                    TextColor="#E53935"
+                                    CornerRadius="10"
+                                    WidthRequest="44"
+                                    HeightRequest="44"
+                                    Padding="0"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}"
+                                    CommandParameter="{Binding .}"
+                                    VerticalOptions="Center"/>
+
+                            </Grid>
+                        </Border>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <!-- MENSAJE CUANDO ESTÁ VACÍO -->
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Spacing="10"
+                        Margin="0,40">
+                        <Label
+                            Text="📭"
+                            FontSize="48"
+                            HorizontalOptions="Center"/>
+                        <Label
+                            Text="No hay contactos aún"
+                            FontSize="16"
+                            TextColor="#AAAAAA"
+                            HorizontalOptions="Center"/>
+                        <Label
+                            Text="Agrega uno con el formulario de arriba"
+                            FontSize="13"
+                            TextColor="#CCCCCC"
+                            HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentPage>

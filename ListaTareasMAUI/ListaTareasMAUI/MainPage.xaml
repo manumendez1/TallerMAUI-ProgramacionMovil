@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:ListaTareasMAUI.ViewModels"
+    x:Class="ListaTareasMAUI.MainPage"
+    Title="Lista de Tareas"
+    BackgroundColor="#F3F7FF">
+
+    <ContentPage.BindingContext>
+        <viewmodel:MainViewModel/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="20">
+
+            <!-- HEADER -->
+
+            <Frame
+                BackgroundColor="#2563EB"
+                CornerRadius="25"
+                Padding="25">
+
+                <VerticalStackLayout>
+
+                    <Label
+                        Text="📝 MIS TAREAS"
+                        FontSize="32"
+                        FontAttributes="Bold"
+                        TextColor="White"/>
+
+                    <Label
+                        Text="Organiza tus actividades diarias"
+                        FontSize="15"
+                        TextColor="#DBEAFE"/>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+            <!-- AGREGAR -->
+
+            <Frame
+                BackgroundColor="White"
+                CornerRadius="20"
+                Padding="20">
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Entry
+                        Text="{Binding NewTaskName}"
+                        Placeholder="Escribe una tarea..."
+                        FontSize="16"/>
+
+                    <Button
+                        Text="➕ Agregar Tarea"
+                        Command="{Binding AddTaskCommand}"
+                        BackgroundColor="#2563EB"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        HeightRequest="50"
+                        CornerRadius="15"/>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+            <!-- LISTA -->
+
+            <CollectionView
+                ItemsSource="{Binding Tasks}"
+                SelectionMode="None">
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <Frame
+                            Margin="0,5"
+                            BackgroundColor="White"
+                            CornerRadius="20"
+                            Padding="15">
+
+                            <Grid
+                                ColumnDefinitions="Auto,*,Auto"
+                                ColumnSpacing="15">
+
+                                <!-- CHECK -->
+
+                                <CheckBox
+                                    IsChecked="{Binding IsCompleted}"
+                                    Color="#2563EB"
+                                    VerticalOptions="Center"/>
+
+                                <!-- TEXTO -->
+
+                                <VerticalStackLayout
+                                    Grid.Column="1"
+                                    Spacing="4">
+
+                                    <Label
+                                        Text="{Binding Name}"
+                                        FontSize="18"
+                                        FontAttributes="Bold">
+
+                                        <Label.Triggers>
+
+                                            <DataTrigger
+                                                TargetType="Label"
+                                                Binding="{Binding IsCompleted}"
+                                                Value="True">
+
+                                                <Setter
+                                                    Property="TextDecorations"
+                                                    Value="Strikethrough"/>
+
+                                                <Setter
+                                                    Property="TextColor"
+                                                    Value="Gray"/>
+
+                                            </DataTrigger>
+
+                                        </Label.Triggers>
+
+                                    </Label>
+
+                                    <Label
+                                        Text="{Binding CreatedAt, StringFormat='Creada: {0:dd/MM/yyyy HH:mm}'}"
+                                        FontSize="12"
+                                        TextColor="Gray"/>
+
+                                </VerticalStackLayout>
+
+                                <!-- BOTONES -->
+
+                                <HorizontalStackLayout
+                                    Grid.Column="2"
+                                    Spacing="5">
+
+                                    <!-- EDITAR -->
+
+                                    <Button
+                                        Text="✏️"
+                                        BackgroundColor="#DBEAFE"
+                                        WidthRequest="45"
+                                        HeightRequest="45"
+                                        CornerRadius="22"
+                                        Clicked="OnEditTaskClicked"
+                                        CommandParameter="{Binding .}"/>
+
+                                    <!-- ELIMINAR -->
+
+                                    <Button
+                                        Text="🗑️"
+                                        BackgroundColor="#FEE2E2"
+                                        WidthRequest="45"
+                                        HeightRequest="45"
+                                        CornerRadius="22"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=DeleteTaskCommand}"
+                                        CommandParameter="{Binding .}"/>
+
+                                </HorizontalStackLayout>
+
+                            </Grid>
+
+                        </Frame>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>
